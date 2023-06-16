@@ -27,34 +27,44 @@ const recordCollection = {
       if (records[id].hasOwnProperty(prop)) {
         
         if (prop == 'artist') {
-          console.log("This is an artist")
+          return (records[id][prop]);
         } 
         else if (prop == 'tracks') {
-          console.log("This is a tracks ")
+          (records[id][prop].push(value));
+          return (records[id][prop]);
       } 
         else if (prop == 'albumTitle') {
-        console.log("This is a albumTitle ")
+          return (records[id]['albumTitle']);
     } 
     }
       // ID that not have prop 
-      else if (prop == 'tracks') {
-        console.log("This is not have an tracks")
-      }
       else if (prop == 'artist') {
-        console.log("This is not have an artist")
+        return (records[id][prop] = value);
+      }
+      else if (prop == 'tracks') {
+        records[id][prop] = [];
+        records[id][prop].push(value);
+        return (records[id][prop]);
       } 
       else if (prop == 'albumTitle') {
-        console.log("This is a albumTitle ")
+        return (records[id][prop] = value);
       } 
-
-    // Value == emtry
-    else {
-      console.log("what the hell ?")
-      // delete id.prop
+    } else {
+      return records
     }
-    // return records;
-    }
+    return records;
   }
   
-// console.log(updateRecords(recordCollection, 5439, 'artist', 'ABBA'));
-updateRecords(recordCollection, 5439, 'albumTitle', '1')
+  // console.log(updateRecords(recordCollection, 5439, "artist", "ABBA"))
+  // console.log(updateRecords(recordCollection, 5439, "tracks", "Take a Chance on Me"));
+  // console.log(updateRecords(recordCollection, 2548, "artist", ""));
+  // console.log(updateRecords(recordCollection, 1245, "tracks", "Addicted to Love"))
+  // console.log(updateRecords(recordCollection, 2468, "tracks", "Free"))
+  // console.log(updateRecords(recordCollection, 2548, "tracks", ""))
+  // console.log(updateRecords(recordCollection, 1245, "albumTitle", "Riptide"))
+  function createAnother(a) {
+    const createAnother = { ...a }
+    return createAnother;
+  }
+
+  console.log(createAnother(recordCollection))
