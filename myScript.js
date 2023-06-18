@@ -29,7 +29,27 @@ const contacts = [
 function lookUpProfile(name, prop) {
   // Only change code below this line
 
+  for(let i = 0; i < contacts.length; i++) {
+    if (contacts[i].firstName == name) {
+      if (prop == 'lastName') {
+        return contacts[i].lastName;
+      } 
+      else if (prop == 'likes') {
+        return contacts[i].likes;
+      }
+      else if (prop == 'number') {
+        return contacts[i].number;
+      }
+      else {
+        return ("No such property");
+      }
+  } 
   // Only change code above this line
+ }return ("No such contact");
 }
+console.log(lookUpProfile("Kristian", "sadasd"));
+// console.log(lookUpProfile("Akira", "lastName"));
+// console.log(lookUpProfile("Harry", "lastName"));
+// console.log(lookUpProfile("Kristian", "lastName"));
 
-lookUpProfile("Akira", "likes");
+// console.log(contacts[1].firstName)
