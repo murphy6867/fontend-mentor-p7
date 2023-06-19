@@ -1,55 +1,18 @@
-// Setup
-const contacts = [
-  {
-    firstName: "Akira",
-    lastName: "Laine",
-    number: "0543236543",
-    likes: ["Pizza", "Coding", "Brownie Points"],
-  },
-  {
-    firstName: "Harry",
-    lastName: "Potter",
-    number: "0994372684",
-    likes: ["Hogwarts", "Magic", "Hagrid"],
-  },
-  {
-    firstName: "Sherlock",
-    lastName: "Holmes",
-    number: "0487345643",
-    likes: ["Intriguing Cases", "Violin"],
-  },
-  {
-    firstName: "Kristian",
-    lastName: "Vos",
-    number: "unknown",
-    likes: ["JavaScript", "Gaming", "Foxes"],
-  },
-];
-
-function lookUpProfile(name, prop) {
+const result = {
+  success: ["max-length", "no-amd", "prefer-arrow-functions"],
+  failure: ["no-var", "var-on-top", "linebreak"],
+  skipped: ["no-extra-semi", "no-dup-keys"]
+};
+function makeList(arr) {
   // Only change code below this line
-
-  for(let i = 0; i < contacts.length; i++) {
-    if (contacts[i].firstName == name) {
-      if (prop == 'lastName') {
-        return contacts[i].lastName;
-      } 
-      else if (prop == 'likes') {
-        return contacts[i].likes;
-      }
-      else if (prop == 'number') {
-        return contacts[i].number;
-      }
-      else {
-        return ("No such property");
-      }
-  } 
+  const failureItems = arr.map(item => 
+    `<li class="text-warning">${item}</li>`
+  )
   // Only change code above this line
- }return ("No such contact");
-}
-console.log(lookUpProfile("Kristian", "sadasd"));
-// console.log(lookUpProfile("Akira", "lastName"));
-// console.log(lookUpProfile("Harry", "lastName"));
-// console.log(lookUpProfile("Kristian", "lastName"));
 
-// console.log(contacts[1].firstName)
+  return failureItems;
+}
+
+const failuresList = makeList(result.failure);
+
+console.log(failuresList)
