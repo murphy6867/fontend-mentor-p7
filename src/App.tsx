@@ -1,92 +1,63 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import './App.css'
+import React from "react";
+import './App.css';
 
-function App() {
-  const [members, setMember] = useState([]);
-  const [refresh, getRefresh] = useState(false);
+export default class App extends React.Component {
 
-  useEffect(() => {
-    const getUser = async() => {
-      try {
-        const respones = await axios.get('https://jsd5-mock-backend.onrender.com/members');
-      setMember(respones.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-    getUser();
-  },[refresh]);
-
-  const createNewUser = async(name, age, weight, status) => {
-      try {
-        const newUser = {
-        name: name,
-        age: age,
-        weight: weight,
-        status: status,
-      }
-      const response = await axios.post(`https://jsd5-mock-backend.onrender.com/members`, newUser);
-      getRefresh(!refresh);
-    } catch (error) {
-      console.error(error)
-    }
+  render () {
+    return (
+      <div className="bg-gray-500 p-5 flex items-center justify-center" id="App">
+        <Content />
+      </div>
+    )
   }
-
-
-  return (
-    <div className='bg-black text-white p-5 flex flex-row flex-wrap'>
-      <CreateUser createNewUser={createNewUser} />
-      {members.map((member) => (
-        <Card key={member.id} name={member.name} age={member.age} weight={member.weight} status={member.status}/>
-      ))}
-    </div>
-  )
 }
 
-function Card({ name, age, weight, status }) {
-  return (
-    <div className='container bg-neutral-600 p-5 w-52 rounded-xl m-5'>
-      <h1 className='text-xl mt-4'>Name: {name}</h1>
-      <h1 className='text-xl mt-4'>Age: {age}</h1>
-      <h1 className='text-xl mt-4'>Weight: {weight}</h1>
-      <h1 className='text-xl mt-4'>Status: {status}</h1>
-    </div>
-  );
+class Content extends React.Component {
+
+  render() {
+    return (
+      <div className="bg-teal-200 flex flex-col items-center justify-center rounded-2xl p-5" id="Content">
+        <Header />
+        <Footer />
+      </div>
+    )
+  }
 }
 
-function CreateUser({ createNewUser }) {
-  const [name, setName] = useState('');
-  const [age, setAge] = useState('');
-  const [weight, setWeight] = useState('');
-  const [status, setStatus] = useState('');
+class Header extends React.Component {
 
-  const handleSubmit = (ev) => {
-    ev.preventDefault();
-    createNewUser(name, age, weight, status);
-    // Reset input fields
-    setName('');
-    setAge('');
-    setWeight('');
-    setStatus('');
-  };
-
-  return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Name: </label>
-        <input className='bg-gray-500 py-2 me-3 rounded-xl px-2' type="text" name="user-name" id="username" value={name} onChange={(e) => setName(e.target.value)} />
-        <label htmlFor="userage">Age: </label>
-        <input className='bg-gray-500 py-2 me-3 rounded-xl px-2' type="number" name="user-age" id="userage" value={age} onChange={(e) => setAge(e.target.value)} />
-        <label htmlFor="userweight">Weight: </label>
-        <input className='bg-gray-500 py-2 me-3 rounded-xl px-2' type="number" name="user-weight" id="userweight" value={weight} onChange={(e) => setWeight(e.target.value)} />
-        <label htmlFor="userstatus">Status: </label>
-        <input className='bg-gray-500 py-2 me-3 rounded-xl px-2' type="text" name="user-status" id="userstatus" value={status} onChange={(e) => setStatus(e.target.value)} />
-        <button className='bg-sky-500 p-3 rounded-xl' type="submit">Create User</button>
-      </form>
-    </div>
-  )
+  render() {
+    return (
+      <div className="w-full flex flex-col p-5 justify-center items-center">
+        <div className="w-full controller flex w-100 place-content-between ustify-center items-center">
+          <button className="bg-gray-500 px-4 py-2 rounded-xl text-white">OFF</button>
+          <h1 className="">Current Temperature: {}°C</h1>
+        </div>
+        <Display />
+      </div>
+    )
+  }
 }
 
-export default App
+class Display extends React.Component {
+
+  render () {
+    return (
+      <div className="bg-gray-300 w-64 rounded-xl mt-5 flex items-center justify-center" id="display">
+        <h1 className="text-5xl">{}°C</h1>
+      </div>
+    )
+  }
+}
+
+class Footer extends React.Component {
+
+  render () {
+    return (
+      <div className="w-full px-9 flex items-center place-content-between ">
+        <button className="px-3 py-2 bg-slate-500 w-28 rounded-xl text-white">Up</button>
+        <button className="px-3 py-2 bg-slate-500 w-28 rounded-xl text-white">Down</button>
+      </div>
+    )
+  }
+}
