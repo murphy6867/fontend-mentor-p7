@@ -8,6 +8,7 @@
     height: 50vh;
 }
 
-#display {
-    height: 15vh;
+#card {
+    width: 20vw;
+    height: 20vh;
 }
